@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# this pack is valid for apps with a hello.txt in the root
+echo "Ocaml"

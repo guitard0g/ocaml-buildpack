@@ -18,7 +18,8 @@ echo "       Downloading dependencies"
 echo "       Downloading dependencies..."
 
 echo "       Running opam install script..."
-yes "/usr/local/bin" | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh) 2>&1 | sed -u 's/^/       /'
+yes "$build/opam" | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh) 2>&1 | sed -u 's/^/       /'
+ls -la "$build/opam" 2>&1 | sed -u 's/^/       /'
 
 echo "       Installing ocamlbuild..."
 opam install ocamlbuild 2>&1 | sed -u 's/^/       /'

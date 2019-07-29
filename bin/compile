@@ -17,7 +17,7 @@ echo "-----> Found main.ml"
 echo "       Downloading dependencies"
 echo "       Downloading dependencies..."
 
-ls -la $cache/opam 2>&1 | sed -u 's/^/       /'
+rm -rf $cache/opam 2>&1 | sed -u 's/^/       /'
 if test -f "$cache/opam"; then
   echo "$FILE exist"
 else 

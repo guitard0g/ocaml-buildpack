@@ -17,14 +17,15 @@ echo "-----> Found main.ml"
 echo "       Downloading dependencies"
 echo "       Downloading dependencies..."
 
-mkdir "$cache/opam" 2>&1 | sed -u 's/^/       /'
-ls -la "$cache/opam" 2>&1 | sed -u 's/^/       /'
-echo "       Running opam install script..."
-yes "$cache/opam" | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh) 2>&1 | sed -u 's/^/       /'
-ls -la "$cache/opam" 2>&1 | sed -u 's/^/       /'
+if test -f "$cache/opam"; then
+  echo "$FILE exist"
+else 
+  echo "       Running opam install script..."
+  yes "$cache" | sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh) 2>&1 | sed -u 's/^/       /'
+fi
 
 echo "       Installing ocamlbuild..."
-opam install ocamlbuild 2>&1 | sed -u 's/^/       /'
+$cache/opam install ocamlbuild 2>&1 | sed -u 's/^/       /'
 
 echo "       Finished downloading dependencies."
 

@@ -6,20 +6,16 @@ indent() {
 
 echo "-----> Found main.ml"
 
-echo "Downloading dependencies" | sed -u 's/^/       /'
-echo "Downloading dependencies..."| sed -u 's/^/       /'
+echo "       Downloading dependencies"
+echo "       Downloading dependencies..."
 
-echo "Running opam install script..."| sed -u 's/^/       /'
-curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh
+echo "       Running opam install script..."
+sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh) 2>&1 | sed -u 's/^/       /'
 
-echo "Installing ocamlbuild..."| sed -u 's/^/       /'
-opam install ocamlbuild
+echo "       Installing ocamlbuild..."
+opam install ocamlbuild 2>&1 | sed -u 's/^/       /'
 
-echo "Finished downloading dependencies."| sed -u 's/^/       /'
-
-echo "Starting build..."| sed -u 's/^/       /'
-make all
-echo "Finished build."| sed -u 's/^/       /'
+echo "       Finished downloading dependencies."
 
 set -e
 bpdir=$(cd $(dirname $(dirname $0)); pwd)
@@ -30,5 +26,7 @@ cache=$(cd "$2/" && pwd)
 test -z ${cache} && exit
 
 
-ls -l
-make all -C $build
+ls -la $build 2>&1 | sed -u 's/^/       /'
+ls -la $cache 2>&1 | sed -u 's/^/       /'
+ls -la $bpdir 2>&1 | sed -u 's/^/       /'
+make all -C $build  2>&1 | sed -u 's/^/       /'
